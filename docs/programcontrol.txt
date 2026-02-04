@@ -1,0 +1,34 @@
+DOCUMENTATION-----
+if there are files in the folder..
+BUT something is broken about these files?
+EXCEPTION thrown
+EXIT
+
+if there are files in the folder..
+AND if there are no arguments entered...
+THEN iterate through the list of files, printing each file's index and its name
+EXIT
+
+if there are files in the folder..
+AND there is one argument entered
+BUT this argument is NOT an integer
+EXCEPTION NotAnInteger thrown
+EXIT
+
+if there are files in the folder..
+AND there is one argument entered
+AND this argument is an integer
+AND this integer is within the bounds of the number of files
+CREATE a new BufferedFile reader for the file at that specific index in the folder
+LOOP through each line of the file and print it out
+EXIT
+
+
+TESTING IDEAS-----
+- no args given
+- non-int arg given
+- too many args
+- arg is not within folder range
+- file is empty
+- file does not contain strings
+- file is missing
