@@ -1,9 +1,10 @@
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class CipherUtilityTest {
+public class CipherTest {
     @Test
     public void addTest() {
-        assertEquals(4, CipherUtility.add(1,3));
+        Assertions.assertEquals(4, Cipher.add(1,3));
     }
 }
