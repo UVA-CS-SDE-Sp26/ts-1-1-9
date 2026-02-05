@@ -6,6 +6,8 @@ import java.io.*;
 public class TopSecret {
     public static void main(String[] args) { // maybe this should be in a "solve" method b/c we are running tests in a separate file?
         File folder = new File("data"); // just replace this with whatever the actual folder is (especially file and whatnot)
+        // Mock
+
         // Team member A
 
         // Team member B

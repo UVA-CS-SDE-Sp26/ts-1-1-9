@@ -1,0 +1,2 @@
+In your test file:
+-import static org.mockito.Mockito.*;
