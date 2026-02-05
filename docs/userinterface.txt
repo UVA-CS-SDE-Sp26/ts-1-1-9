@@ -1,6 +1,7 @@
 User Interface
 
-The program's user interface is the command line. It takes between 0 and 2 arguments.
+The program's user interface is the command line. The program takes between 0
+and 2 arguments.
 
 No arguments:
 When no arguments are given, a numbered list of available files is presented.
