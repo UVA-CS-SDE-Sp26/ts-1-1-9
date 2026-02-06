@@ -21,7 +21,6 @@ public string ReadFile(filepath)
 
     return file_output
 
-
 Tests
 1. Filename Cypher mispelled as cipher-input(cipher.txt)-expected output "File not found exception"
 2  filename cypher  with text "abc"-input(cypher.txt)-expected output file_output="abc"
