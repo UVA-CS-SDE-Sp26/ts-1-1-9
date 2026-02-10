@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c96c2614-57ab-44c1-82df-5c75ca329a31" name="Changes" comment="added more boiler for tests">
-      <change afterPath="$PROJECT_DIR$/docs/userInterface.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="c96c2614-57ab-44c1-82df-5c75ca329a31" name="Changes" comment="interface for how to use user interface" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -221,7 +217,15 @@
       <option name="project" value="LOCAL" />
       <updated>1770314659646</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="interface for how to use user interface">
+      <option name="closed" value="true" />
+      <created>1770696364016</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1770696364017</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -231,7 +235,8 @@
     <MESSAGE value="added markdown boiler" />
     <MESSAGE value="boiler for cipher-utility class and added .idea folder to gitignore" />
     <MESSAGE value="added more boiler for tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="added more boiler for tests" />
+    <MESSAGE value="interface for how to use user interface" />
+    <option name="LAST_COMMIT_MESSAGE" value="interface for how to use user interface" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
