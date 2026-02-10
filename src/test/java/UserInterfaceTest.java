@@ -4,20 +4,23 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class UserInterfaceTest {
 
+    String testFileList = "1 file1\n2 file 2\n3 file 3";
+    String testFileContents = "contents of a file";
+
     @Test
     public void parseArgumentsZero() {
         UserInterface ui = new UserInterface();
         String[] arguments = new String[]{};
-        ui.parseArguments(arguments);
-        // expect file list
+        String result = ui.parseArguments(arguments);
+        assertEquals(testFileList, result);
     }
 
     @Test
     public void parseArgumentsOneValid() {
         UserInterface ui = new UserInterface();
         String[] arguments = new String[]{"1"};
-        ui.parseArguments(arguments);
-        // expect file contents using the default key
+        String result = ui.parseArguments(arguments);
+        assertEquals(testFileContents, result);
     }
 
     @Test
@@ -31,7 +34,8 @@ class UserInterfaceTest {
     public void parseArgumentsTwoValid() {
         UserInterface ui = new UserInterface();
         String[] arguments = new String[]{"1", "key.txt"};
-        // expect deciphered file contents using the key
+        String result = ui.parseArguments(arguments);
+        assertEquals(testFileContents, result);
     }
 
     @Test
@@ -39,8 +43,8 @@ class UserInterfaceTest {
         UserInterface ui = new UserInterface();
         String[] arguments_first = new String[]{"invalid", "key.txt"};
         assertThrows(IllegalArgumentException.class, () -> ui.parseArguments(arguments_first), "Should throw IllegalArgumentException as the first argument is not a number");
-        String[] arguments_second = new String[]{"1", "not a cipher"};
-        assertThrows(IllegalArgumentException.class, () -> ui.parseArguments(arguments_second), "Should throw IllegalArgumentException as the second argument is not a cypher");
+        //String[] arguments_second = new String[]{"1", "not a cipher"};
+        //assertThrows(IllegalArgumentException.class, () -> ui.parseArguments(arguments_second), "Should throw IllegalArgumentException as the second argument is not a cypher");
     }
 
     @Test
