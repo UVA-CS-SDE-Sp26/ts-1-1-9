@@ -67,7 +67,8 @@ public class ProgramControl {
         } else {
             keyFilePath = keyArgPath;
         }
-
+        
+        // Get Cipher class method to take in two parameters
         String readableText = Cipher.decipher(cipheredText, keyFilePath);
 
         if (readableText == null) {
