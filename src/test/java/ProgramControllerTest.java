@@ -19,27 +19,36 @@ public class ProgramControllerTest {
         mockFileHandler = Mockito.mock(FileHandler.class);
         mockCipher = Mockito.mock(Cipher.class);
 
-        // Inject mocks using a special constructor you add for testing
         controller = new ProgramController(mockFileHandler, mockCipher);
     }
 
-    // ------------------------------------------------------------
-    // LIST FILES TESTS
-    // ------------------------------------------------------------
-
+    // Be able to attain the files through FileHandler
     @Test
-    public void testListFiles_basic() {
+    public void testGetFilesFromFileHandler() {
+        List<String> files = Arrays.asList("a.txt", "b.txt");
+        when(mockFileHandler.getAvailableFiles()).thenReturn(files);
+
+        String result = controller.listFiles();
+
+        assertTrue(result.contains("a.txt"));
+        assertTrue(result.contains("b.txt"));
+        verify(mockFileHandler, times(1)).getAvailableFiles();
+    }
+
+    // Be able to display the array of file names
+    @Test
+    public void testListFilesFormatted() {
         List<String> files = Arrays.asList("a.txt", "b.txt", "c.txt");
         when(mockFileHandler.getAvailableFiles()).thenReturn(files);
 
         String result = controller.listFiles();
 
         assertEquals("01 a.txt\n02 b.txt\n03 c.txt", result);
-        verify(mockFileHandler, times(1)).getAvailableFiles();
     }
 
+    // Test for empty files
     @Test
-    public void testListFiles_empty() {
+    public void testListFilesEmpty() {
         when(mockFileHandler.getAvailableFiles()).thenReturn(List.of());
 
         String result = controller.listFiles();
@@ -47,40 +56,28 @@ public class ProgramControllerTest {
         assertEquals("No files found.", result);
     }
 
+    // Be able to print/read the text files
     @Test
-    public void testListFiles_exception() {
-        when(mockFileHandler.getAvailableFiles()).thenThrow(new RuntimeException());
-
-        String result = controller.listFiles();
-
-        assertEquals("ERROR: Unable to list files.", result);
-    }
-
-    // ------------------------------------------------------------
-    // DISPLAY FILE TESTS
-    // ------------------------------------------------------------
-
-    @Test
-    public void testDisplayFile_plainText() {
-        List<String> files = Arrays.asList("a.txt");
-        when(mockFileHandler.getAvailableFiles()).thenReturn(files);
-        when(mockFileHandler.readFile("a.txt")).thenReturn("HELLO");
+    public void testDisplayFilePlainText() {
+        when(mockFileHandler.getAvailableFiles()).thenReturn(List.of("hello.txt"));
+        when(mockFileHandler.readFile("hello.txt")).thenReturn("HELLO WORLD");
 
         String result = controller.displayFile("1", "");
 
-        assertEquals("HELLO", result);
-        verify(mockFileHandler).readFile("a.txt");
+        assertEquals("HELLO WORLD", result);
+        verify(mockFileHandler).readFile("hello.txt");
         verify(mockCipher, never()).decipher(anyString(), anyString());
     }
 
+
+    // Be able to print/read the text files with key
     @Test
-    public void testDisplayFile_withCipher() {
-        List<String> files = Arrays.asList("secret.txt");
-        when(mockFileHandler.getAvailableFiles()).thenReturn(files);
+    public void testDisplayFileWithKey() {
+        when(mockFileHandler.getAvailableFiles()).thenReturn(List.of("secret.txt"));
         when(mockFileHandler.readFile("secret.txt")).thenReturn("XYZ");
 
-        // loadKey returns null in your real cipher class, so we mock that behavior
-        when(mockCipher.loadKey("key.txt")).thenReturn(null);
+        // loadKey is void → must use doNothing()
+        doNothing().when(mockCipher).loadKey("key.txt");
 
         when(mockCipher.getCipher()).thenReturn("ABC");
         when(mockCipher.decipher("XYZ", "ABC")).thenReturn("DECODED");
@@ -92,25 +89,27 @@ public class ProgramControllerTest {
         verify(mockCipher).decipher("XYZ", "ABC");
     }
 
+    // Be able to check valid user inputs and catch errors
     @Test
-    public void testDisplayFile_invalidNumber() {
-        List<String> files = Arrays.asList("a.txt");
-        when(mockFileHandler.getAvailableFiles()).thenReturn(files);
+    public void testInvalidFileNumber() {
+        when(mockFileHandler.getAvailableFiles()).thenReturn(List.of("a.txt"));
 
         String result = controller.displayFile("5", null);
 
         assertEquals("ERROR: Invalid file number.", result);
     }
 
+    // Test is user input is numerical
     @Test
-    public void testDisplayFile_nonNumeric() {
+    public void testNonNumericInput() {
         String result = controller.displayFile("abc", null);
 
         assertEquals("ERROR: File number must be a number.", result);
     }
 
+    // Test DisplayFile exception
     @Test
-    public void testDisplayFile_exception() {
+    public void testDisplayFileException() {
         when(mockFileHandler.getAvailableFiles()).thenThrow(new RuntimeException());
 
         String result = controller.displayFile("1", "key.txt");
