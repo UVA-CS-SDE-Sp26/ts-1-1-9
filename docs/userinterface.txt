@@ -1,23 +1,53 @@
-Top Secret
-2/4/26
-Elise Fremberg (A)
+Top Secret - Katherine Ku (A)
 
-This program is responsible for the command line interface used by the user to run the program.
+Program Name:
+    topsecret
 
-PSUEDOCODE
-if args == 0
-    call method to display all the files
+How to Run:
+    java topsecret
+    java topsecret <fileNum>
+    java top secret <fileNum><keyOverride>
 
-else if args == 1
-    call method to display the file at the index given by the users argument
+ Args:
+    <fileNum>
+        - displays on screen the contents of the file
+        - must be a two digit number string
+        - program uses the default key for deciphering
 
-else if args == 2
-    call method to display the file and use the key given by the user's second arg
+    <keyOverride>
+        - specifies an alternate key to use when deciphering
+        - contents of the corresponding file is displayed on screen
+        - optional second arg
 
+Behavior:
+    1. No Arguments
+        Command:
+            java topsecret
+        Output:
+            Prints a numbered list of available files
+            After printing the list, the program exits
 
-TESTS
-if zero arguments, then should list the numbered files available
-if one valid argument, then should open correct value at the index given by that argument
-if two valid arguments, then should open a correct file and use the key given by user's second arg
+    2. One Argument
+        Command:
+            java topsecret 01
+        Output:
+            Displays the contents of the file associated with "01"
+            After displaying the contents, the program exits
 
-if invalid arguments, then should reprompt the user
+    3. Two Arguments
+        Command:
+            java topsecret 01 alternateKey.txt
+        Output:
+            Displays the contents of the file associated with "01" using the alternate key
+            After displaying the contents, the program exits
+
+Error Handling:
+ - Too many arguments:
+      if more than 2 arguments are provided, print "ERROR: Too Many Arguments"
+ - Invalid file number format:
+      if <fileNum> is not exactly two digits ranging from 00-99, print: "ERROR: Invalid File Number"
+ - Unknown file:
+    if <fileNum> is a valid format but doesn't correspond to any available file, print: "ERROR: Unknown File"
+ - File can't be deciphered:
+    if deciphering fails like an invalid key, print "ERROR: File Cannot Be Deciphered"
+
