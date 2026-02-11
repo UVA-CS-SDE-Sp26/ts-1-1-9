@@ -1,5 +1,7 @@
 /**
  * Commmand Line Utility
+ * part a --> command line interface
+ * checking the number of arguments the user uses
  */
 import java.util.*;
 import java.io.*;
@@ -86,3 +88,5 @@ public class TopSecret {
 
 
 }
+
+
