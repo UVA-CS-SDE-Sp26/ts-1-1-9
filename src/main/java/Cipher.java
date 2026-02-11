@@ -70,7 +70,7 @@ public class Cipher {
             System.out.println("Error. The file was not found.");
             e.printStackTrace();
         }
-        return null;
+        return this.cipher;
     }
 
     /**
@@ -108,6 +108,7 @@ public class Cipher {
             // as punctuation symbols are automatically dropped
             if (mapKeyCharacter.containsKey(ch)) {
                 deciphered.append(mapKeyCharacter.get(ch));
+            } else { deciphered.append(ch); // preserve punctuation, spaces, digits
             }
         }
         // prompt next line
