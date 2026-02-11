@@ -30,19 +30,20 @@ public class ProgramControllerTest {
 
         String result = controller.listFiles();
 
+        // see if results have the files
         assertTrue(result.contains("a.txt"));
         assertTrue(result.contains("b.txt"));
         verify(mockFileHandler, times(1)).getAvailableFiles();
     }
 
-    // Be able to display the array of file names
+    // Be able to display the array of file names in the format the assignment wants
     @Test
     public void testListFilesFormatted() {
         List<String> files = Arrays.asList("a.txt", "b.txt", "c.txt");
         when(mockFileHandler.getAvailableFiles()).thenReturn(files);
 
         String result = controller.listFiles();
-
+        // checks if it prints out the right format
         assertEquals("01 a.txt\n02 b.txt\n03 c.txt", result);
     }
 
