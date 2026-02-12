@@ -9,7 +9,6 @@ import java.util.Scanner;
  * Allows for deciphering of text substitution key.
  */
 public class SubstitutionKey {
-  // Key is the base char and value is the char that subsitutes that char in
   // Key is the base char and value is the char that substitutes that char in
   // decrypted message.
   private HashMap<Character, Character> substitutionKey;
