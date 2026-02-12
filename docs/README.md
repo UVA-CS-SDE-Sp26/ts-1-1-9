@@ -1,2 +1,1 @@
-# TopSecret Documentation
-...
+# Documentation
