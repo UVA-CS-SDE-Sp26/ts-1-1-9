@@ -27,7 +27,7 @@ Examples:
     Output:
     [contents of fileb.txt, deciphered using default cipher code]
 
-3. display file #1 using cipher codem-[p='
+3. display file #1 using cipher code
     java topsecret 02 5
 
     Output:
