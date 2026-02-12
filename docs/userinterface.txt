@@ -5,6 +5,62 @@ Elise Fremberg (A)
 This program is responsible for the command line interface used by the user to run the program.
 
 PSUEDOCODE
+//defines a static constant Pattern in Java that matches exactly two digits
+Pattern FILE_NUMBER
+//testing variable
+int testing = -1
+
+//getters and setters for testing variable to use when writing the test code
+int getTesting()
+    return testing
+void setTesting(int t)
+    testing = t;
+
+//main
+public static void main(String args[])
+    create new ProgramController object called user
+
+    //need to validate arguments so use a try catch
+    try
+        //call method to validate args
+        validateArgs()
+
+        if args.length = 0
+            list files
+            testing = 0
+        else if args.length = 1
+            display files with default cipher
+            testing = 1
+        else
+            display files using cipher given by user
+            testing = 2
+
+    catch (IllegalArgumentException e)
+        print e.getMessage()
+        print "Correct Format: java topsecret [fileNumber] [optionalKey]"
+        testing = 3
+
+void validateArgs(String args[])
+    //check if there are more than 3 arguments
+    if args.length > 2
+        throw new IllegalArgumentException
+
+    //check file number is valid and in correct format
+    if args.length >= 1
+        fileNumber = args[0]
+        if fileNumber = null OR !FILE_NUMBER.matcher(fileNumber).matches()
+            throw new IllegalArgumentException
+
+    //check that given cipher key isnt blank
+    if args.length  == 2
+        optionalKey = args[1]
+        if optionalKey = null OR optionalKey.isBlank()
+            throw new IllegalArgumentException
+
+
+
+
+
 if args == 0
     call method to display all the files
 
@@ -16,8 +72,23 @@ else if args == 2
 
 
 TESTS
-if zero arguments, then should list the numbered files available
-if one valid argument, then should open correct value at the index given by that argument
-if two valid arguments, then should open a correct file and use the key given by user's second arg
+**use a testing variable to keep track of where the code enters**
 
-if invalid arguments, then should reprompt the user
+valid arguments:
+if zero arguments, then should list the numbered files available (enter the if (args.length == 0) block of code)
+    testing variable should return 0
+if one valid argument, then should open correct value at the index given by that argument (enter the else if (args.length == 1) block of coe)
+    testing variable shoulr return 1
+if two valid arguments, then should open a correct file and use the key given by user's second arg (enter the else block of code)
+    testing variable should return 2
+
+invalid arguments:
+if more than 2 arguments, should not move forward and tell user correct format (enter the catch (IllegalArgumentException e) block of code)
+    testing variable should return 3
+    assert that it throws an IllegalArgumentException
+if file number is not valid (correct format), should not move forward and tell user correct format (enter the catch (IllegalArgumentException e) block of code)
+    testing variable should return 3
+    assert that it throws an IllegalArgumentException
+if the user provided cipher key is empty/blank, should not move forward and tell user correct format (enter the catch (IllegalArgumentException e) block of code)
+    testing variable should return 3
+    assert that it throws an IllegalArgumentException
