@@ -1,4 +1,4 @@
-package topsecret;
+package TopSecret;
 public class Command {
     public enum Type {
         list_files,

@@ -1,18 +1,20 @@
-/**
- * Commmand Line Utility
- */
-package topsecret;
+import java.io.InputStream;
+import java.util.Scanner;
 
-public class TopSecret {
+public class topsecret {
+    static String[] files = {"filea.txt", "fileb.txt", "filec.txt"};
+    static int defaultCipher = 3;
     public static void main(String[] args){
-        Command command = parseArguments(args);
-        switch (command.getType()){
-            case list_files:
-                System.out.println("Listing files...");
-                break;
+        if (args.length == 0){
+            for (int i = 0; i<files.length; i++) {
+                int number = i + 1;
+
+            } else if (args.length == 2){
+                int cipher = Integer.parseInt(args[1]);
+                showFile(args[0], cipher);
+            }
             case show_file:
-                System.out.println("Showing file " + command.getFileNumber());
-                System.out.println("using key: " + command.getKey());
+                showFile(command.getFileNumber(), command.getKey());
                 break;
             case error:
                 System.out.println("error" + command.getErrorMessage());
@@ -37,5 +39,42 @@ public class TopSecret {
             key = args[1];
         }
         return Command.show(fileNumber, key);
+    }
+
+    private static void listFiles() {
+        try {
+            Map<String, Path> map = discoverNumberedFiles();
+            if (map.isEmpty()) {
+                System.out.println("No files found in " + DATA_DIR.toAbsolutePath());
+                return;
+            }
+            for (String num : map.keySet()) {
+                System.out.println(num + " " + map.get(num).getFileName().toString());
+            }
+        } catch (IOException e) {
+            System.out.println("error: could not list files: " + e.getMessage());
+        }
+    }
+
+    private static void showFile(String fileNumber, String key) {
+        try {
+            Map<String, Path> map = discoverNumberedFiles();
+            Path p = map.get(fileNumber);
+
+            if (p == null) {
+                System.out.println("error: file number " + fileNumber + " not found.");
+                return;
+            }
+
+            String contents = Files.readString(p);
+
+            // If your team uses ciphered files, decipher here.
+            // If your team uses plain text files, just print contents.
+            String output = Cipher.decipher(contents, key);
+
+            System.out.print(output);
+        } catch (IOException e) {
+            System.out.println("error: could not read file: " + e.getMessage());
+        }
     }
 }
