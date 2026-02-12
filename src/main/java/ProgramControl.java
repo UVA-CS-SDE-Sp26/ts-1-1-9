@@ -16,6 +16,7 @@ public class ProgramControl {
             default -> "Error: Expected 0, 1, or 2 arguments."
 
         }
+
     }
 
     private String listFiles{
