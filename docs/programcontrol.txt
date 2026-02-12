@@ -1,5 +1,7 @@
 Program Control
 
+-- DESCRIPTION --
+
 After the user interacts with the CLI and User Interface parses through arguments, Program Control decides how to
 proceed according to the number of arguments provided. Program control takes between 0 and 2 arguments.
 
@@ -18,7 +20,36 @@ When there are two arguments given, the program should request file contents fro
 specified alternate key to use when deciphering. If the file number or alternate key is invalid, Program Control returns
 an error message. If the deciphered message is returned successfully, Program Control returns the deciphered string.
 
+-- TESTS --
 
+.run()
+    given 0 arguments, should return string listing files
+    given 1 valid argument, should return string with corresponding fileContent
+    given 1 invalid argument, should return error
+    given 2 valid arguments, should return string with corresponding fileContent
+    given 2 arguments and invalid fileNum, should return invalid file error message
+    given 2 arguments and invalid key, should return invalid key error message
+    given more than 2 arguments, should return invalid arguments error
+
+
+- number of arguments
+    - How does program responds when 0 args
+        * list files available to display:
+                01 filea.txt
+                02 fileb.txt
+                03 filec.txt
+        * program exits
+    - How does program responds when 1 args
+        * if valid file, responds with correspondgin file text
+        * program exits
+    - How does program responds when 2 args
+        * if valid file and key [?], responds with corresponding deciphered gile
+        * program exits
+    - How does program respond when >2 args
+- arguments themselves
+        - How does program respond if invalid args
+            * error message
+            * program exits
 
 -- PSEUDOCODE --
 
@@ -70,57 +101,3 @@ public class ProgramControl {
 
 
 
-}
-
-
-
-
-    }
-
-
-
-switch args
-    case -> args <= 0
-        ask for directory of files [data] from B
-        provide list of files [for A to print to CLI]
-    case -> args == 1
-       read arg
-       ask B for corresponding file
-       send file to D, default key
-       receive deciphered file from D
-       send desciphered file to A
-   case -> args == 2
-        same as if args == 1
-        but send in key as specified in args[1]
-   default -> 0
-        provide list of files
-
-
-
- # what do i need to understand for this program to work?
-        1) which files am i to send in each case? ciphered files? deciphered files?
-        2) figure out how I will receive arguments [how does CLI UI work?]
-        3) how will i receive text back?
-        4) how do I want to call the decipher dunction (person D's part)
-        5) what fields do I need?
-        6) how do I actually want to send the file itself? or read the file and then write it out again?
-
-# tests:
-- number of arguments
-    - How does program responds when 0 args
-        * list files available to display:
-                01 filea.txt
-                02 fileb.txt
-                03 filec.txt
-        * program exits
-    - How does program responds when 1 args
-        * if valid file, responds with correspondgin file text
-        * program exits
-    - How does program responds when 2 args
-        * if valid file and key [?], responds with corresponding deciphered gile
-        * program exits
-    - How does program respond when >2 args
-- arguments themselves
-        - How does program respond if invalid args
-            * error message
-            * program exits
