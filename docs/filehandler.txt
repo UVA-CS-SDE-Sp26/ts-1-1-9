@@ -11,7 +11,7 @@ use try-catch blocks to catch any errors while accessing the file.
 use a loop to loop through each line and add it to a string.
 
 if the file is encrypted, decrypt it before returning the file.
-
+if 2 arguements are passed, use the alternate cypher key.
 
 Testing documentation :
 test that the program to see if it returns files correctly.
