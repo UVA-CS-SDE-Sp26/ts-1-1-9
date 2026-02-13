@@ -17,7 +17,6 @@ class ProgramControllerTest {
 
     @Test
     void noArguments() {
-
         when(fileHandler.getFiles()).thenReturn(Arrays.asList("file1.txt", "file2.txt"));
         String result = controller.run(new String[] {});
 
@@ -28,7 +27,6 @@ class ProgramControllerTest {
 
     @Test
     void checkIndex() {
-
         when(fileHandler.getFiles()).thenReturn(Arrays.asList("a.txt", "b.txt"));
         when(fileHandler.readFile("b.txt")).thenReturn("Hello");
         String result = controller.run(new String[] { "2" });
@@ -40,7 +38,6 @@ class ProgramControllerTest {
 
     @Test
     void checkInvalidNumber() {
-
         when(fileHandler.getFiles()).thenReturn(Arrays.asList("a.txt"));
         String result = controller.run(new String[] { "abc" });
 
@@ -51,7 +48,6 @@ class ProgramControllerTest {
 
     @Test
     void outOfRange() {
-
         when(fileHandler.getFiles()).thenReturn(Arrays.asList("a.txt"));
         String result = controller.run(new String[] { "5" });
 
