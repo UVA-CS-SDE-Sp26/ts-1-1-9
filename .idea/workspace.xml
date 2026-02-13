@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="11d74008-8339-4675-89e0-143d7228c8cb" name="Changes" comment="fixed some stuff">
+    <list default="true" id="11d74008-8339-4675-89e0-143d7228c8cb" name="Changes" comment="finished fileHander.java">
+      <change afterPath="$PROJECT_DIR$/src/test/java/fileHandlerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/TopSecretTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TopSecretTest.java" afterDir="false" />
@@ -57,7 +59,7 @@
     &quot;Gradle.ts-1-1-16 [:fileRead.TopSecret.main()].executor&quot;: &quot;Run&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/java/fileRead" />
@@ -161,10 +163,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="finished" />
-    <MESSAGE value="fixed some stuff" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed some stuff" />
   </component>
 </project>
