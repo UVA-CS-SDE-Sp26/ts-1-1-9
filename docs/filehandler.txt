@@ -10,3 +10,20 @@ Another method should read each line from a file and add it to a string.
 use try-catch blocks to catch any errors while accessing the file.
 use a loop to loop through each line and add it to a string.
 
+if the file is encrypted, decrypt it before returning the file.
+
+
+Testing documentation :
+test that the program to see if it returns files correctly.
+    - check to see if the files list is empty or not after calling getfiles.
+test that program throws an error if the program tries to call the wrong file
+    -check to see if readfile runs with no error after reading a fake file.
+    -if .readfile returns an error, the test passes.
+    -if readfile compiles without error, fail the test.
+test that the program reads the files correctly.
+    -if the file is null, the test fails.
+    -if .readFile gets the right file, the test passes.
+
+test that the program decrypts the files if they are encrypted.
+    -test passes if the plain file and decryped file are the same after readfile is called.
+

@@ -43,4 +43,13 @@ public class fileHandlerTest {
         //false if file is empty
 
     }
+
+    @Test
+    void checkForCIP(){
+        FileHandler filehandler = new FileHandler();
+        String testedFile = filehandler.readFile("carnivore.txt");
+        String encryptedFile = filehandler.readFile("carnivore.cip");
+        assertNotNull(encryptedFile);
+        assertEquals(testedFile.trim(), encryptedFile.trim());
+    }//check to see if the encrypted file is decryped after read.readFile is called.
 }
