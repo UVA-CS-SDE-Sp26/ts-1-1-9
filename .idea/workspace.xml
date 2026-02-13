@@ -6,8 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="11d74008-8339-4675-89e0-143d7228c8cb" name="Changes" comment="fixed some stuff">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ProgramController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ProgramController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ProgramControllerTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/TopSecretTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TopSecretTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,6 +18,16 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view />
+      </state>
+    </system>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -39,15 +49,15 @@
     <commands />
     <urls />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Gradle.Build ts-1-1-16.executor": "Run",
-    "Gradle.TopSecretTest.executor": "Run",
-    "Gradle.ts-1-1-16 [:TopSecret.main()].executor": "Run",
-    "Gradle.ts-1-1-16 [:fileRead.TopSecret.main()].executor": "Run",
-    "git-widget-placeholder": "main"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.Build ts-1-1-16.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.TopSecretTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ts-1-1-16 [:TopSecret.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ts-1-1-16 [:fileRead.TopSecret.main()].executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/java/fileRead" />

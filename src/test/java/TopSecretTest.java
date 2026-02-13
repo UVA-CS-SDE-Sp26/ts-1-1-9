@@ -1,18 +1,17 @@
 import org.junit.jupiter.api.Test;
 
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 class TopSecretTest {
 
     @Test
-    void start_delegatesToControllerRun() {
-        ProgramController controller = mock(ProgramController.class);
-        TopSecret app = new TopSecret(controller);
-
-        String[] args = {"01"};
-
-        app.start(args);
-
-        verify(controller).run(args);
+    void getArgs_returnsSameReference() {
+        String[] args = {"01", "key"};
+        assertSame(args, TopSecret.getArgs(args));
+    }
+    @Test
+    void getArgs_emptyArray() {
+        String[] args = {};
+        assertArrayEquals(new String[]{}, TopSecret.getArgs(args));
     }
 }
