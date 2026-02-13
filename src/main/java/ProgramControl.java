@@ -7,7 +7,11 @@ import java.util.Collections;
 import java.util.List;
 
 public class ProgramControl {
-    private static final String DATA_FOLDER = "src" + File.separator + "files";
+    // where the ciphered text to decrypt is
+    private static final String FILES_FOLDER = "src" + File.separator + "files";
+    // where cipher key files are
+    private static final String CIPHER_FOLDER = "ciphers";
+    // default key in ciphers folder
     private static final String DEFAULT_KEY_FILE = "key.txt";
 
     // Called when program runs with no arguments.
@@ -32,7 +36,7 @@ public class ProgramControl {
 
     // Called when program runs with 2 args (custom key)
     // Example: java TopSecret 01 customkey.txt
-    public static void displayFile(String fileId, String keyArgPath) {
+    public static void displayFile(String fileId, String keyArgName) {
         List<String> files = listDataFiles();
         if (files.isEmpty()) {
             System.out.println("Error: No files available.");
@@ -49,39 +53,30 @@ public class ProgramControl {
 
         // Building path to selected file
         String filename = files.get(index);
-        String filePath = DATA_FOLDER + File.separator + filename;
+        String filePath = FILES_FOLDER + File.separator + filename;
 
         // Use Team Member B: read file
         fileHandler fh = new fileHandler(filePath);
         String cipheredText = fh.fileOut();
 
-        if (cipheredText == null) {
+        if (cipheredText == null || cipheredText.isBlank()) {
             System.out.println("Error: Could not read file: " + filePath);
             return;
         }
 
-        // Team Member D: decipher using key file
+        // Read key data
+        fileHandler keyFH = new fileHandler(keyFilePath);
+        String keyData = keyFH.fileOut();
+
+        if (keyData == null || keyData.isBlank()) {
+            System.out.println("Error: Could not read key file: " + filePath);
+            return;
+        }
+
+        // Team Member D: decipher using ciphered string and cipher key string
         try {
-            String readableText;
-            String keyFilePath;
-
-            if (keyArgPath == null || keyArgPath.isBlank()) {
-                keyFilePath = DATA_FOLDER + File.separator + DEFAULT_KEY_FILE;  // default key file in /data
-            } else {
-                keyFilePath = keyArgPath; // user provided path
-            }
-            // Read key file (cipher combination) content
-            fileHandler keyFH = new fileHandler(keyFilePath);
-            String keyData = keyFH.fileOut();
-
-            if (keyData == null) {
-                System.out.println("Error: Could not read key file: " + keyFilePath);
-                return;
-            }
-
-            readableText = cipher.decipher(cipheredText, keyData);
+            String readableText = cipher.decipher(cipheredText, keyData);
             System.out.println(readableText);
-
         }
         catch (Exception e){
             System.out.println("Error: Could not decipher file");
