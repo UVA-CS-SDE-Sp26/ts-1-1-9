@@ -7,11 +7,11 @@ public class TopSecret {
     public static void main(String[] args) {
       try {
         DetermineUsage req = UserInterfaceParser.parse(args);
-        String output = tempProgramControl.run(req);
-        System.out.print(output);
+          String output = RequestProcessor.run(req);
+          System.out.print(output);
       } catch (IllegalArgumentException ex) {
-        System.out.println("Error: invalid arguments.");
-        printUsage();
+          System.out.println("Error: " + ex.getMessage());
+          printUsage();
       } catch (Exception ex) {
         System.out.println("Error: " + ex.getMessage());
       }
