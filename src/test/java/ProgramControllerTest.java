@@ -1,121 +1,67 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-
-import java.io.FileNotFoundException;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Arrays;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-public class ProgramControllerTest {
+@ExtendWith(MockitoExtension.class)
+class ProgramControllerTest {
 
-    private FileHandler mockFileHandler;
-    private Cipher mockCipher;
-    private ProgramController controller;
+    @Mock
+    private FileHandler fileHandler;
 
-    @BeforeEach
-    public void setup() {
-        mockFileHandler = Mockito.mock(FileHandler.class);
-        mockCipher = Mockito.mock(Cipher.class);
+    private ProgramController controller;
 
-        controller = new ProgramController(mockFileHandler, mockCipher);
-    }
+    @BeforeEach
+    void setUp() {
+        controller = new ProgramController(fileHandler);
+    }
 
-    // Be able to attain the files through FileHandler
-    @Test
-    public void testGetFilesFromFileHandler() {
-        List<String> files = Arrays.asList("a.txt", "b.txt");
-        when(mockFileHandler.getAvailableFiles()).thenReturn(files);
+    @Test
+    void noArguments() {
 
-        String result = controller.listFiles();
+        when(fileHandler.getFiles()).thenReturn(Arrays.asList("file1.txt", "file2.txt"));
+        String result = controller.run(new String[] {});
 
-        // see if results have the files
-        assertTrue(result.contains("a.txt"));
-        assertTrue(result.contains("b.txt"));
-        verify(mockFileHandler, times(1)).getAvailableFiles();
-    }
+        assertEquals("1. file1.txt\n2. file2.txt\n", result);
+        verify(fileHandler).getFiles();
+        verifyNoMoreInteractions(fileHandler);
+    }
 
-    // Be able to display the array of file names in the format the assignment wants
-    @Test
-    public void testListFilesFormatted() {
-        List<String> files = Arrays.asList("a.txt", "b.txt", "c.txt");
-        when(mockFileHandler.getAvailableFiles()).thenReturn(files);
+    @Test
+    void checkIndex() {
 
-        String result = controller.listFiles();
-        // checks if it prints out the right format
-        assertEquals("01 a.txt\n02 b.txt\n03 c.txt", result);
-    }
+        when(fileHandler.getFiles()).thenReturn(Arrays.asList("a.txt", "b.txt"));
+        when(fileHandler.readFile("b.txt", null)).thenReturn("Hello");
+        String result = controller.run(new String[] { "2" });
 
-    // Test for empty files
-    @Test
-    public void testListFilesEmpty() {
-        when(mockFileHandler.getAvailableFiles()).thenReturn(List.of());
+        assertEquals("Hello", result);
+        verify(fileHandler).getFiles();
+        verify(fileHandler).readFile("b.txt", null);
+    }
 
-        String result = controller.listFiles();
+    @Test
+    void checkInvalidNumber() {
 
-        assertEquals("No files found.", result);
-    }
+        when(fileHandler.getFiles()).thenReturn(Arrays.asList("a.txt"));
+        String result = controller.run(new String[] { "abc" });
 
-    // Be able to print/read the text files
-    @Test
-    public void testDisplayFilePlainText() {
-        when(mockFileHandler.getAvailableFiles()).thenReturn(List.of("hello.txt"));
-        when(mockFileHandler.readFile("hello.txt")).thenReturn("HELLO WORLD");
+        assertEquals("Error: file needs to be an integer", result);
+        verify(fileHandler).getFiles();
+        verify(fileHandler, never()).readFile(anyString(), anyString());
+    }
 
-        String result = controller.displayFile("1", "");
+    @Test
+    void outOfRange() {
 
-        assertEquals("HELLO WORLD", result);
-        verify(mockFileHandler).readFile("hello.txt");
-        verify(mockCipher, never()).decipher(anyString(), anyString());
-    }
+        when(fileHandler.getFiles()).thenReturn(Arrays.asList("a.txt"));
+        String result = controller.run(new String[] { "5" });
 
-
-    // Be able to print/read the text files with key
-//    @Test
-//    public void testDisplayFileWithKey() throws FileNotFoundException {
-//        when(mockFileHandler.getAvailableFiles()).thenReturn(List.of("secret.txt"));
-//        when(mockFileHandler.readFile("secret.txt")).thenReturn("XYZ");
-//
-//        doReturn(null).when(mockCipher).loadKey("key.txt");
-//
-//        when(mockCipher.getCipher()).thenReturn("ABC");
-//        when(mockCipher.decipher("XYZ", "ABC")).thenReturn("DECODED");
-//
-//        String result = controller.displayFile("1", "key.txt");
-//
-//        assertEquals("DECODED", result);
-//        verify(mockCipher).loadKey("key.txt");
-//        verify(mockCipher).decipher("XYZ", "ABC");
-//    }
-
-
-    // Be able to check valid user inputs and catch errors
-    @Test
-    public void testInvalidFileNumber() {
-        when(mockFileHandler.getAvailableFiles()).thenReturn(List.of("a.txt"));
-
-        String result = controller.displayFile("5", null);
-
-        assertEquals("ERROR: Invalid file number.", result);
-    }
-
-    // Test is user input is numerical
-    @Test
-    public void testNonNumericInput() {
-        String result = controller.displayFile("abc", null);
-
-        assertEquals("ERROR: File number must be a number.", result);
-    }
-
-    // Test DisplayFile exception
-    @Test
-    public void testDisplayFileException() {
-        when(mockFileHandler.getAvailableFiles()).thenThrow(new RuntimeException());
-
-        String result = controller.displayFile("1", "key.txt");
-
-        assertEquals("ERROR: Unable to display file.", result);
-    }
+        assertEquals("Error: out of range", result);
+        verify(fileHandler).getFiles();
+        verify(fileHandler, never()).readFile(anyString(), anyString());
+    }
 }
