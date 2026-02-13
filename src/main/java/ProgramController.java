@@ -9,7 +9,7 @@ public class ProgramController {
     }
 
     // Returns output instead of printing directly
-    public String fileDecider(String[] args) {
+    public String run(String[] args) {
         List<String> availableFiles = fileHandler.getFiles();
 
         // No arguments → return list of files
