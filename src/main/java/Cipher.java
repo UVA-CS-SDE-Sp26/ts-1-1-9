@@ -38,6 +38,9 @@ public class Cipher {
      * @return cipher key
      * @throws FileNotFoundException
      */
+
+
+    /*
     public String loadKey(String keyFilePath) {
         try {
             // initialize new file object using string parameter
@@ -72,6 +75,64 @@ public class Cipher {
         }
         return this.cipher;
     }
+    */
+
+    public String loadKey(String keyFilePath) throws FileNotFoundException {
+        // initialize new file object using string parameter
+        File cipherKeyFile = new File(keyFilePath);
+        // initialize new scanner object to read file
+        Scanner recordCipherStrings = new Scanner(cipherKeyFile);
+
+        // check whether file has next line
+        if (recordCipherStrings.hasNextLine()) {
+            // first line is the actual character string
+            this.actual = recordCipherStrings.nextLine();
+            // check whether file has second line
+            if (recordCipherStrings.hasNextLine()) {
+                // second line is the cipher character key string
+                this.cipher = recordCipherStrings.nextLine();
+            } else {
+                recordCipherStrings.close();
+                System.out.println("The file does not contain a cipher key.");
+            }
+        } else {
+            recordCipherStrings.close();
+            System.out.println("The file is empty.");
+        }
+
+        recordCipherStrings.close();
+        return this.cipher;
+    }
+
+    /*
+    public String loadKey(String keyFilePath) {
+        // initialize new file object using string parameter
+
+        File cipherKeyFile = new File(keyFilePath);
+        // initialize new scanner object to read file
+        Scanner recordCipherStrings = new Scanner(cipherKeyFile);
+
+        // check whether file has next line
+        if (recordCipherStrings.hasNextLine()) {
+            // first line is the actual character string
+            this.actual = recordCipherStrings.nextLine();
+            // check whether file has second line
+            if (recordCipherStrings.hasNextLine()) {
+                // second line is the cipher character key string
+                this.cipher = recordCipherStrings.nextLine();
+            } else {
+                recordCipherStrings.close();
+                System.out.println("The file does not contain a cipher key.");
+            }
+        } else {
+            recordCipherStrings.close();
+            System.out.println("The file is empty.");
+        }
+
+        recordCipherStrings.close();
+        return this.cipher;
+    }
+    */
 
     /**
      * method receives user scanner input and cipher key both as strings
