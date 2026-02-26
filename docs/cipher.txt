@@ -1,0 +1,22 @@
+-- Documentation --
+
+-- Task --
+Take a ciphered string and return it deciphered based on the cipher in key.txt
+
+-- Pseudo code --
+Take the ciphered string and assigned to a variable (cipheredString)
+
+Check to see if the ciphered string has any value not in the key.txt
+
+-- If there is any value not in key.txt --
+return a string or null value
+
+-- if there's no value not in key.txt --
+open key.txt
+assign ciphered key to a variable
+assign un-ciphered key to a variable
+run a for loop between ciphered string and cipher key
+if matched replace ciphered string with un-ciphered value
+repeat until end of the end of the ciphered string
+
+return un-ciphered string
